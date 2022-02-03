@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div class="grid grid-cols-1 divide-y">
+        <div class="bg-slate-900 flex justify-start">
+            <div class="mb-2 mt-2 ml-2">
+                <h1 class="mt-3 lg:text-2xl md:text-2xl font-bold text-slate-50"><a href="http://localhost:8000/">Task
+                        <span
+                            class="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-green-500 relative inline-block">
+                            <span class="relative text-white">Manager</span>
+                        </span>
+                    </a>
+                </h1>
+            </div>
+            <div class="ml-3"><button
+                    class="border-2 rounded-full border-rose-500 bg-rose-500 text-slate-50 text-1xl mt-5 px-3">
+                    <a href="http://localhost:8000/all_tasks">Pending <span
+                            class="font-bold">{{tasks|length}}</span></a></button>
+            </div>
+            <div class="ml-3"><button
+                    class="border-2 rounded-full border-slate-500 bg-slate-500 text-slate-50 text-1xl mt-5 px-3">
+                    <a href="http://localhost:8000/tasks">Add</a></button>
+            </div>
+            <br><br><br>
+        </div>
+        <div class="grid lg:grid-cols-2 sm:grid-cols-1 gap-4">
+            <div>
+                <br><br>
+                <blockquote class="text-2xl font-semibold italic text-center text-slate-900">
+                    Manage your Tasks
+                    <span
+                        class="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-pink-500 relative inline-block">
+                        <span class="relative text-white">like a pro</span>
+                    </span>
+                    with us, don't worry we got your back.
+                </blockquote>
+                <img src="https://vectorforfree.com/wp-content/uploads/2020/03/Working_Men_VectorForFree.png" />
+            </div>
+            <div>
+                <div class="text-center">
+                    <div class=" border-2 border-orange-500 px-2 py-2  mt-4 mx-2" style="height:auto">
+                        <h1 class="text-orange-500 text-2xl font-bold">
+                            Completed Task
+                        </h1>
+                        {% if completedTasks %}
+                        <center>
+                            <form action="" class="w-full max-w-sm">
+                                <div class="flex items-center border-b border-rose-500 py-2">
+                                    <input
+                                        class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                                        type="text" placeholder="Search Task" name="search"
+                                        aria-label="Search Task name" required>
+                                    {% if searchQuery %}
+                                    <button
+                                        class="flex-shrink-0 bg-rose-500 hover:bg-rose-700 border-rose-500 hover:border-rose-700 text-sm border-4 text-white py-1 px-2 rounded"
+                                        type="submit">
+                                        Search Task
+                                    </button>
+                                    <button
+                                        class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 ml-2 rounded"
+                                        type="button">
+                                        <a href="http://localhost:8000/completed_tasks">Reset</a>
+                                    </button>
+                                    {% else %}
+                                    <button
+                                        class="flex-shrink-0 bg-rose-500 hover:bg-rose-700 border-rose-500 hover:border-rose-700 text-sm border-4 text-white py-1 px-2 rounded"
+                                        type="submit">
+                                        Search Task
+                                    </button>
+                                    {% endif %}
+                                </div>
+                            </form>
+                        </center>
+                        {% if searchCompletedTasks %}
+                        <ul role="list" class="p-6 divide-y divide-orange-500">
+
+                            {% for completedTask in searchCompletedTasks %}
+                            <li class="flex py-4 first:pt-0 last:pb-0 ">
+                                <img class="h-30 w-20 rounded-full"
+                                    src="https://icon-library.com/images/task-icon-png/task-icon-png-24.jpg" alt="" />
+                                <div class="ml-3 overflow-hidden">
+                                    <p class="text-xl font-medium text-slate-900">Name: {{completedTask}}</p>
+                                    <p class="text-sm text-slate-500 truncate">{{completedTask.created_date}}</p>
+
+                                </div>
+
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <br>
+                        <center>
+                            <img src="https://cdn-icons-png.flaticon.com/512/5058/5058432.png" width="100px"
+                                height="70px">
+                            <br>
+                            <h1 class="text-xl font-bold">Sorry no task found!</h1>
+                        </center>
+                        {% endif %}
+                        {% else %}
+                        <br>
+                        <br>
+                        <center>
+                            <img src="https://www.shareicon.net/data/512x512/2015/09/17/642130_task_512x512.png"
+                                width="100px" height="70px"><br>
+                            <h1 class="text-xl font-bold">No Tasks Completed</h1>
+                        </center>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
